@@ -1,2 +1,2 @@
 # csf-personal
-My personal website for showcasing my work
+A personal website for showcasing my work.
