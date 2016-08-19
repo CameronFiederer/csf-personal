@@ -10,7 +10,7 @@ gulp.task('clean', function () {
         .pipe(clean());
 });
 
-gulp.task("scriptsNStyles", () => {
+gulp.task("compile", () => {
     gulp.src([
             'core-js/client/**',
             'systemjs/dist/system.src.js',
@@ -33,7 +33,7 @@ gulp.task('ts', function (done) {
             "scripts/*.ts"
     ])
         .pipe(ts(tsProject), undefined, ts.reporter.fullReporter());
-    return tsResult.js.pipe(gulp.dest('./wwwroot/appScripts'));
+    return tsResult.js.pipe(gulp.dest('./wwwroot/app'));
 });
 
 gulp.task('watch', ['watch.ts']);
@@ -42,4 +42,4 @@ gulp.task('watch.ts', ['ts'], function () {
     return gulp.watch('scripts/*.ts', ['ts']);
 });
 
-gulp.task('default', ['scriptsNStyles', 'watch']);
+gulp.task('default', ['compile', 'watch']);

@@ -22,7 +22,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 source/CSF.MySite/Web/wwwroot/libs/
-source/CSF.MySite/Web/wwwroot/appScripts/
+source/CSF.MySite/Web/wwwroot/app/
 source/CSF.MySite/Web/typings
 # Visual Studio 2015 cache/options directory
 .vs/
