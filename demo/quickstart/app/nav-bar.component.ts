@@ -21,7 +21,7 @@ export class NavBarComponent  {
                            {id:'adfas', name: 'Swest Entry', type: 'Post'}];
     }
     
-    selectNavEntry(navEntry: NavEntry) {
+    selectNavEntry(navEntry: NavBarEntry): void {
         this.navSelectionUpdated.emit(navEntry);
     }
 }

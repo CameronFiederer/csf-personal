@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
+import { NavBarEntry } from './nav-bar-entry.model';
 
 @Component({
   selector: 'my-body',
-  template: `<my-nav-bar (selectionUpdated)='onUpdate($event)'></my-nav-bar><my-content [name]=name></my-content>`,
+  template: `<my-nav-bar (navSelectionUpdated)='onUpdate($event)'></my-nav-bar><my-content [entryToDisplay]=selectedEntry></my-content>`,
 })
 export class BodyComponent  { 
-    name = 'body';
+    selectedEntry: NavBarEntry = new NavBarEntry('hah','hah','hah');
 
-    onUpdate(event:any){
-        console.log(event);
-        this.name = event;
+    onUpdate(event:NavBarEntry){
+        this.selectedEntry = event;
     }
 }
