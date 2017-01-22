@@ -17,7 +17,7 @@ export class NavBarComponent  {
 
     getNavEntries(): void {
         // Replace with Api call
-        this.navEntries = [{id:'3k2j4', name: 'Sweet Entry', type: 'Post'},
+        this.navEntries = [{id:'1', name: 'Declaration of Intent', type: 'Post'},
                            {id:'adfas', name: 'Swest Entry', type: 'Post'}];
     }
     
