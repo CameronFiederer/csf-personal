@@ -3,7 +3,7 @@ import { NavBarEntry } from './nav-bar-entry.model';
 
 @Component({
   selector: 'my-content',
-  template: `<h1>This is boss ass {{entryData}}</h1>`,
+  templateUrl: './content.component.html'
 })
 export class ContentComponent  { 
     @Input() entryToDisplay: NavBarEntry;

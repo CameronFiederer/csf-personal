@@ -6,8 +6,7 @@ import { NavBarEntry } from './nav-bar-entry.model';
 
 @Component({
   selector: 'my-blog',
-  template: `<my-nav-bar (navSelectionUpdated)='onUpdate($event)'>
-             </my-nav-bar><my-content [entryToDisplay]=selectedEntry></my-content>`,
+  templateUrl: './blog.component.html'
 })
 export class BlogComponent implements OnInit { 
     constructor(

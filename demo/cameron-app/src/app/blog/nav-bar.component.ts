@@ -3,9 +3,7 @@ import { NavBarEntry } from './nav-bar-entry.model';
 
 @Component({
   selector: 'my-nav-bar',
-  template: `<li *ngFor="let navEntry of navEntries" (click)="selectNavEntry(navEntry)">
-                <span> {{navEntry.name}} </span>
-             </li>`,
+  templateUrl: './nav-bar.component.html',
 })
 export class NavBarComponent  { 
     @Output() navSelectionUpdated = new EventEmitter();
