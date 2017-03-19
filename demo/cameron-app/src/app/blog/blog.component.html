@@ -1,2 +1,6 @@
-<my-nav-bar (navSelectionUpdated)='onUpdate($event)'>
-</my-nav-bar><my-content [entryToDisplay]=selectedEntry></my-content>
+<div class="container-fluid">
+    <div class="row">
+        <my-nav-bar class="col-lg-3"(navSelectionUpdated)='onUpdate($event)'></my-nav-bar>
+        <my-content class="col-lg-9"[entryToDisplay]=selectedEntry></my-content>
+    </div>
+</div>

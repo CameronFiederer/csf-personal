@@ -1,3 +1,5 @@
-<li *ngFor="let navEntry of navEntries" (click)="selectNavEntry(navEntry)">
-    <span> {{navEntry.name}} </span>
-</li>
+<ul class="list-group">
+    <li class="list-group-item" [ngClass]="[(selectedEntry == navEntry) ? 'active' : '']" *ngFor="let navEntry of navEntries" (click)="selectNavEntry(navEntry)">
+        <span> {{navEntry.name}} </span>
+    </li>
+</ul>

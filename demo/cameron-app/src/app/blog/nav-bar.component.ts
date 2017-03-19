@@ -8,7 +8,7 @@ import { NavBarEntry } from './nav-bar-entry.model';
 export class NavBarComponent  { 
     @Output() navSelectionUpdated = new EventEmitter();
     navEntries: NavBarEntry[];
-
+    selectedEntry: NavBarEntry;
     ngOnInit(): void {
         this.getNavEntries();
     }
@@ -21,6 +21,7 @@ export class NavBarComponent  {
     }
     
     selectNavEntry(navEntry: NavBarEntry): void {
+        this.selectedEntry = navEntry;
         this.navSelectionUpdated.emit(navEntry);
     }
 }
