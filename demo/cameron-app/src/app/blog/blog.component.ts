@@ -20,7 +20,7 @@ export class BlogComponent implements OnInit {
         console.log(this.route.params['id']);
     }
 
-    selectedEntry: NavBarEntry = new NavBarEntry(0,'hah','hah');
+    selectedEntry: NavBarEntry = new NavBarEntry(0,'hah','hah',false);
 
     onUpdate(event:NavBarEntry){
         this.selectedEntry = event;
