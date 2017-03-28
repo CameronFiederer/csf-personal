@@ -1,16 +1,28 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavBarEntry } from './nav-bar-entry.model';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'my-nav-bar',
   templateUrl: './nav-bar.component.html',
 })
 export class NavBarComponent  { 
-    @Output() navSelectionUpdated = new EventEmitter();
     navEntries: NavBarEntry[];
-    selectedEntry: NavBarEntry;
+    selectedEntryId: Number;
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router
+    ) {}
+
     ngOnInit(): void {
         this.getNavEntries();
+        let theseRams:Params= this.route.params;
+
+        this.route.params.subscribe(params => {
+            let id = params['id'];
+            console.log(id);
+            this.selectedEntryId = id;
+        });
     }
 
     getNavEntries(): void {
@@ -21,7 +33,6 @@ export class NavBarComponent  {
     }
     
     selectNavEntry(navEntry: NavBarEntry): void {
-        this.selectedEntry = navEntry;
-        this.navSelectionUpdated.emit(navEntry);
+        this.router.navigate(['/blog', navEntry.id]);
     }
 }

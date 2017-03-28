@@ -17,7 +17,7 @@ const appRoutes: Routes = [
   {
     path: 'blog/:id',
     component: BlogComponent,
-    data: { title: 'Heroes List' }
+    data: { title: 'Blog' }
   },
   { 
     path: '',
