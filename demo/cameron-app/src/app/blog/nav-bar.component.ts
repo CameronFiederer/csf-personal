@@ -15,9 +15,9 @@ export class NavBarComponent  {
 
     getNavEntries(): void {
         // Replace with Api call
-        this.navEntries = [{id:1, name: 'Declaration of Intent', type: 'Post'},
-                           {id:2, name: 'Initial Goals', type: 'Post'},
-                           {id:3, name: 'Moving On', type: 'Post'}];
+        this.navEntries = [{id:1, name: 'Declaration of Intent', type: 'Post', isSelected: false},
+                           {id:2, name: 'Initial Goals', type: 'Post', isSelected: false},
+                           {id:3, name: 'Moving On', type: 'Post', isSelected: false}];
     }
     
     selectNavEntry(navEntry: NavBarEntry): void {
