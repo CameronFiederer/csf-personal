@@ -12,5 +12,10 @@
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSF.Data\CSF.Data.csproj" />
+    <ProjectReference Include="..\CSF.Domain\CSF.Domain.csproj" />
+    <ProjectReference Include="..\CSF.Model\CSF.Model.csproj" />
+  </ItemGroup>
 
 </Project>
