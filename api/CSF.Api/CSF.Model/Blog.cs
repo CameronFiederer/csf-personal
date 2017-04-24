@@ -7,11 +7,8 @@ using System.Text;
 namespace CSF.Model
 {
     [Table("Blog")]
-    public class Blog
+    public class Blog : BaseModel
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public string Body { get; set; }
     }
 }
