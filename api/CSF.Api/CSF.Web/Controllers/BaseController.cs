@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CSF.Web.Controllers
 {
-    [Route("[controller]")]
+    //[Route("[controller]")]
     public abstract class BaseController<T> where T : class
     {
         protected BaseManager<T> baseManager;
@@ -15,7 +15,6 @@ namespace CSF.Web.Controllers
         }
 
         [HttpGet]
-        [Route("Get")]
         public virtual T Get(T modelWithId)
         {
             return baseManager.Get(modelWithId);
@@ -23,7 +22,6 @@ namespace CSF.Web.Controllers
 
         // Gotta figure out this routing properly
         [HttpGet]
-        [Route("GetAll")]
         public virtual IEnumerable<T> GetAll()
         {
             return baseManager.GetAll();

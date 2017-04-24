@@ -39,7 +39,11 @@ namespace CSF.Web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 
-            app.UseMvc();
+            app.UseMvc(routes =>
+                routes.MapRoute(
+                    name: "default_route",
+                    template: "{controller}/{action}/{id?}",
+                    defaults: new { controller = "Home", action = "Index" }));
         }
     }
 }
