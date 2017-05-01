@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CSF.Web.Controllers
 {
-    public class BlogController : BaseController<Blog>
+    public class BlogController : CrudController<Blog>
     {
         public BlogController(BaseManager<Blog> blogManager) : base(blogManager)
         {

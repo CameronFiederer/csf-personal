@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace CSF.Web.Controllers
 {
-    public abstract class BaseController<T> where T : BaseModel, new()
+    public abstract class CrudController<T> : ControllerBase where T : BaseModel, new()
     {
         protected BaseManager<T> baseManager;
 
-        public BaseController(BaseManager<T> baseManager)
+        public CrudController(BaseManager<T> baseManager)
         {
             this.baseManager = baseManager;
         }
