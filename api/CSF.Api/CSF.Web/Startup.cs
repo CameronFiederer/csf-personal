@@ -1,10 +1,17 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using CSF.Data;
 using CSF.Domain;
+using System.Security.Claims;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Amazon.CognitoIdentity;
+using Amazon.CognitoIdentityProvider;
 
 namespace CSF.Web
 {
@@ -28,6 +35,10 @@ namespace CSF.Web
             services.AddMvc();
             // Not a huge fan of having these here as it forces the web project to have references down to the data layer
             // Will consider adding a separate project to initialize these.
+            services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+            services.AddAWSService<IAmazonCognitoIdentity>();
+            services.AddAWSService<IAmazonCognitoIdentityProvider>();
+            
             services.AddScoped<ConnectionFactory, ConnectionFactory>();
             services.AddScoped(typeof(Repository<>), typeof(Repository<>));
             services.AddScoped(typeof(BaseManager<>), typeof(BaseManager<>));
@@ -38,6 +49,23 @@ namespace CSF.Web
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationScheme = "Cookies",
+                AutomaticAuthenticate = false,
+                AutomaticChallenge = false
+            });
+
+            app.UseClaimsTransformation(context =>
+            {
+                if (context.Principal.Identity.IsAuthenticated)
+                {
+                    context.Principal.Identities.First().AddClaim(new Claim("now", DateTime.Now.ToString()));
+                }
+
+                return Task.FromResult(context.Principal);
+            });
 
             app.UseMvc(routes =>
                 routes.MapRoute(
