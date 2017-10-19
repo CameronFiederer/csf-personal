@@ -33,6 +33,10 @@ namespace CSF.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Administrator", policy => policy.RequireClaim("cognito:groups", "Administrators"));
+            });
             // Not a huge fan of having these here as it forces the web project to have references down to the data layer
             // Will consider adding a separate project to initialize these.
             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
@@ -48,23 +52,13 @@ namespace CSF.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationScheme = "Cookies",
-                AutomaticAuthenticate = false,
+                AutomaticAuthenticate = true,
                 AutomaticChallenge = false
-            });
-
-            app.UseClaimsTransformation(context =>
-            {
-                if (context.Principal.Identity.IsAuthenticated)
-                {
-                    context.Principal.Identities.First().AddClaim(new Claim("now", DateTime.Now.ToString()));
-                }
-
-                return Task.FromResult(context.Principal);
             });
 
             app.UseMvc(routes =>

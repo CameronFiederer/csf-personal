@@ -2,16 +2,17 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
     <ApplicationIcon />
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
+    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Dapper.FastCrud" Version="2.4.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.1.1" />
-    <PackageReference Include="Npgsql" Version="3.2.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.0.0" />
+    <PackageReference Include="Npgsql" Version="3.2.1" />
   </ItemGroup>
 
 </Project>

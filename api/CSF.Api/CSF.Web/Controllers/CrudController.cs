@@ -1,6 +1,8 @@
 ﻿using CSF.Domain;
 using CSF.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace CSF.Web.Controllers
@@ -33,42 +35,48 @@ namespace CSF.Web.Controllers
 
         [HttpPost]
         [Route("[controller]")]
-        public virtual void Post(T model)
+        [Authorize(Policy = "Administrator")]
+        public virtual void Post([FromBody]T model)
         {
             baseManager.Insert(model);
         }
 
         [HttpPost]
         [Route("[controller]s")]
-        public virtual void PostThese(IEnumerable<T> models)
+        [Authorize(Policy = "Administrator")]
+        public virtual void PostThese([FromBody]IEnumerable<T> models)
         {
             baseManager.Insert(models);
         }
 
         [HttpPut]
         [Route("[controller]")]
-        public virtual void Put(T model)
+        [Authorize(Policy = "Administrator")]
+        public virtual void Put([FromBody]T model)
         {
             baseManager.Update(model);
         }
 
         [HttpPut]
         [Route("[controller]s")]
-        public virtual void PutThese(IEnumerable<T> models)
+        [Authorize(Policy = "Administrator")]
+        public virtual void PutThese([FromBody]IEnumerable<T> models)
         {
             baseManager.Update(models);
         }
 
         [HttpDelete]
         [Route("[controller]")]
-        public virtual void Delete(T model)
+        [Authorize(Policy = "Administrator")]
+        public virtual void Delete([FromBody]T model)
         {
             baseManager.Delete(model);
         }
 
         [HttpDelete]
         [Route("[controller]s")]
-        public virtual void DeleteThese(IEnumerable<T> models)
+        [Authorize(Policy = "Administrator")]
+        public virtual void DeleteThese([FromBody]IEnumerable<T> models)
         {
             baseManager.Delete(models);
         }

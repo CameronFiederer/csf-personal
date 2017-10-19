@@ -4,8 +4,11 @@ using Amazon.CognitoIdentityProvider;
 using Amazon.CognitoIdentityProvider.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace CSF.Web.Controllers
@@ -44,32 +47,29 @@ namespace CSF.Web.Controllers
                 ClientId = "6jihcdqm2oh1r39ksfj5k3dcf5"
             });
 
+            // Not handling any AuthChallenges atm
+            //AdminRespondToAuthChallengeResponse challengeResponse = await cognitoProvider.AdminRespondToAuthChallengeAsync(new AdminRespondToAuthChallengeRequest()
+            //{
+            //    UserPoolId = "us-east-1_8zHPTN94n",
+            //    ChallengeName = authResponse.ChallengeName,
+            //    Session = authResponse.Session,
+            //    ChallengeResponses = new Dictionary<string, string>
+            //    {
+            //        ["NEW_PASSWORD"] = "P@ssword1",
+            //        ["USERNAME"] = creds.username
+            //    },
+            //    ClientId = "6jihcdqm2oh1r39ksfj5k3dcf5"
+            //});
 
-            if (creds.username == creds.password)
-            {
-                GetIdResponse response = await cognito.GetIdAsync(new GetIdRequest()
-                {
-                    AccountId = "749316239733",
-                    IdentityPoolId = "us-east-1:3dcf8ac0-8894-4f75-b0e0-3adc53142170",
-                    //Logins = new Dictionary<string, string>
-                    //{
-                    //    ["cognito-idp.us-east-1.amazonaws.com/us-east-1_8zHPTN94n"] = "6jihcdqm2oh1r39ksfj5k3dcf5"
-                    //}
-                });
-                
-                
-                List<Claim> claims = new List<Claim>
-                {
-                    new Claim("sub", "19828281888"),
-                    new Claim("given_name", "Dominick"),
-                    new Claim("role", "Geek")
-                };
+            // If we want to do Cognito federated Auth - we should add GetIdAsync and GetCredentialsForIdentityAsync
 
-                ClaimsIdentity id = new ClaimsIdentity(claims, "password");
-                ClaimsPrincipal p = new ClaimsPrincipal(id);
+            JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityToken token = jwtSecurityTokenHandler.ReadJwtToken(authResponse.AuthenticationResult.IdToken);
 
-                await HttpContext.Authentication.SignInAsync("Cookies", p);
-            }
+            ClaimsIdentity id = new ClaimsIdentity(token.Claims, "password");
+            ClaimsPrincipal p = new ClaimsPrincipal(id);
+
+            await HttpContext.Authentication.SignInAsync("Cookies", p);
         }
 
         [Route("Logout")]

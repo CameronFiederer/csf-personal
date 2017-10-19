@@ -1,0 +1,10 @@
+﻿{
+  "profile": "default",
+  "region": "us-east-1",
+  "configuration": "Release",
+  "framework": "netcoreapp1.0",
+  "function-runtime": "dotnetcore1.0",
+  "function-memory-size": 512,
+  "function-timeout": 30,
+  "function-handler": "CSF.Web::CSF.Web.LambdaBootstrap::FunctionHandlerAsync"
+}
